@@ -1,0 +1,28 @@
+ALGORITHM AddTwoNumbers(l1, l2)
+
+PROBLEM DESCRIPTION:
+Add two numbers represented by linked lists in reverse order and return the sum as a linked list.
+
+    INPUT:
+        l1: linked list of first number
+        l2: linked list of second number
+    OUTPUT:
+        linked list of the sum
+
+    BEGIN:
+        dummy <- new ListNode(0)
+        carry <- 0
+        current <- dummy
+
+        WHILE l1 != null OR l2 != null OR carry != 0 DO
+            val1 <- IF l1 != null THEN l1.val ELSE 0
+            val2 <- IF l2 != null THEN l2.val ELSE 0
+            sum <- val1 + val2 + carry
+            carry <- sum // 10
+            current.next <- new ListNode(sum % 10)
+            current <- current.next
+            IF l1 != null THEN l1 <- l1.next
+            IF l2 != null THEN l2 <- l2.next
+
+        RETURN dummy.next
+    END
