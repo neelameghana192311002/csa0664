@@ -1,0 +1,22 @@
+ALGORITHM TwoSum(nums, target)
+
+PROBLEM DESCRIPTION:
+Find indices of two numbers in the array nums that add up to the integer target, ensuring each input has exactly one solution and not using the same element twice.
+
+    INPUT: 
+        nums: array of integers
+        target: integer
+    OUTPUT:
+        array of two integers representing the indices
+
+    BEGIN:
+        dictionary <- empty dictionary
+        FOR i <- 0 to length of nums - 1 DO
+            complement <- target - nums[i]
+            IF complement is in dictionary THEN
+                RETURN [dictionary[complement], i]
+          
+            dictionary[nums[i]] <- i
+        END FOR
+        RETURN []
+    END
