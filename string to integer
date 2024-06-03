@@ -1,0 +1,38 @@
+ALGORITHM Atoi(s)
+
+PROBLEM DESCRIPTION:
+Convert a string to a 32-bit signed integer according to the specified rules.
+
+    INPUT:
+        s: a string containing the representation of an integer
+    OUTPUT:
+        a 32-bit signed integer
+
+    BEGIN:
+        i <- 0
+        n <- length of s
+        sign <- 1
+        result <- 0
+
+        WHILE i < n AND s[i] == ' ' DO
+            i <- i + 1
+        END WHILE
+
+        IF i < n AND (s[i] == '+' OR s[i] == '-') THEN
+            IF s[i] == '-' THEN
+                sign <- -1
+            END IF
+            i <- i + 1
+        END IF
+
+        WHILE i < n AND s[i] is a digit DO
+            digit <- s[i] - '0'
+            IF result > (INT_MAX - digit) / 10 THEN
+                RETURN sign == 1 ? INT_MAX : INT_MIN
+            END IF
+            result <- result * 10 + digit
+            i <- i + 1
+        END WHILE
+
+        RETURN sign * result
+    END
