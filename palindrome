@@ -1,0 +1,19 @@
+ALGORITHM IsPalindrome(x)
+
+PROBLEM DESCRIPTION:
+Check if the given integer x is a palindrome.
+
+    INPUT:
+        x: an integer
+    OUTPUT:
+        a boolean value indicating whether x is a palindrome or not
+
+    BEGIN:
+        Convert x to a string representation: s <- convertToString(x)
+
+        IF s is equal to its reverse THEN
+            RETURN true
+        ELSE
+            RETURN false
+        END IF
+    END
