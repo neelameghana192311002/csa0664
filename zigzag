@@ -1,0 +1,28 @@
+ALGORITHM ZigzagConversion(s, numRows)
+
+PROBLEM DESCRIPTION:
+Convert a given string into a zigzag pattern with a specified number of rows and return the result.
+
+    BEGIN:
+        IF numRows <= 1 OR length of s <= numRows THEN
+            RETURN s
+        END IF
+
+        rows <- array of numRows strings
+        
+        row <- 0
+        direction <- 1
+
+        FOR each character c in s DO
+            rows[row] <- rows[row] + c
+            row <- row + direction
+            
+            IF row == 0 OR row == numRows - 1 THEN
+                direction <- -direction
+            END IF
+        END FOR
+
+        result <- concatenation of all strings in rows array
+
+        RETURN result
+    END
