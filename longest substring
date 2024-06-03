@@ -1,0 +1,26 @@
+ALGORITHM LongestSubstringWithoutRepeatingCharacters(s)
+
+PROBLEM DESCRIPTION:
+Find the length of the longest substring without repeating characters in a given string.
+
+    INPUT:
+        s: a string
+    OUTPUT:
+        an integer representing the length of the longest substring without repeating characters
+
+    BEGIN:
+        lastSeen <- empty dictionary
+        start <- 0
+        maxLength <- 0
+
+        FOR i <- 0 to length of s - 1 DO
+            IF s[i] is in lastSeen AND lastSeen[s[i]] >= start THEN
+                start <- lastSeen[s[i]] + 1
+            END IF
+
+            lastSeen[s[i]] <- i
+            maxLength <- max(maxLength, i - start + 1)
+        END FOR
+
+        RETURN maxLength
+    END
