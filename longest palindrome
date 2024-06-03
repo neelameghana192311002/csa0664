@@ -1,0 +1,46 @@
+ALGORITHM LongestPalindromicSubstring(s)
+
+PROBLEM DESCRIPTION:
+Find the longest palindromic substring in a given string s.
+
+    INPUT:
+        s: a string
+    OUTPUT:
+        a string representing the longest palindromic substring
+
+    BEGIN:
+        maxLen <- 0
+        startIdx <- 0
+        endIdx <- 0
+
+        FOR i <- 0 to length of s - 1 DO
+            len1 <- expandAroundCenter(s, i, i)
+            len2 <- expandAroundCenter(s, i, i + 1)
+            len <- max(len1, len2)
+
+            IF len > endIdx - startIdx + 1 THEN
+                maxLen <- len
+                startIdx <- i - (len - 1) / 2
+                endIdx <- i + len / 2
+            END IF
+        END FOR
+
+        RETURN substring from startIdx to endIdx in s
+    END
+
+FUNCTION expandAroundCenter(s, left, right)
+    INPUT:
+        s: a string
+        left: integer, starting index
+        right: integer, ending index
+    OUTPUT:
+        integer, length of the palindrome centered at indices left and right
+
+    BEGIN:
+        WHILE left >= 0 AND right < length of s AND s[left] = s[right] DO
+            left <- left - 1
+            right <- right + 1
+        END WHILE
+
+        RETURN right - left - 1
+    END FUNCTION
