@@ -1,0 +1,25 @@
+ALGORITHM ReverseInteger(x)
+
+PROBLEM DESCRIPTION:
+Reverse the digits of a signed 32-bit integer x and return the result. If the reversed integer goes outside the signed 32-bit integer range, return 0.
+
+    INPUT:
+        x: a signed 32-bit integer
+    OUTPUT:
+        a signed 32-bit integer representing the reverse of x
+
+    BEGIN:
+        result <- 0
+        
+        WHILE x != 0 DO
+            digit <- x % 10
+            result <- result * 10 + digit
+            x <- x / 10
+        END WHILE
+        
+        IF result < -2^31 OR result > 2^31 - 1 THEN
+            RETURN 0
+        END IF
+        
+        RETURN result
+    END
