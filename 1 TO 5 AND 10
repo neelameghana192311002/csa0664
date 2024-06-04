@@ -1,0 +1,138 @@
+1.two sum
+Code 
+
+function twoSum_BruteForce(nums, target)
+  for i = 0 to length(nums) - 1 do
+    for j = i + 1 to length(nums) - 1 do
+      if nums[i] + nums[j] == target then
+        return [i, j]
+  end for
+  return []  
+end function
+
+
+2.adding two array
+Code
+ 
+function addArrays(arr1, arr2)
+  if length(arr1) != length(arr2) then
+    print("Error: Arrays must have the same length")
+    return null
+  for i = 0 to length(arr1) - 1
+    result[i] = arr1[i] + arr2[i]
+  return result
+
+
+3.Longest Substring without Repeating Characters
+Code 
+
+function longest_unique_substring(string)
+  longest_length := 0
+  start_index := 0
+  char_set := array with all characters as keys and boolean values as false (initialized to false)
+
+  for i := 0 to length(string) - 1 do
+    current_char := string[i]
+
+    if char_set[current_char] then
+      start_index := max(start_index, char_set[current_char] + 1)
+    end if
+    char_set[current_char] := i
+
+    longest_length := max(longest_length, i - start_index + 1)
+  end for
+  return longest_length
+end function
+
+
+4.Median of Two Sorted Arrays
+Code
+
+function findMedian(arr1, arr2):
+  total_length = len(arr1) + len(arr2)
+
+  i = 0
+  j = 0
+  mid_index = total_length // 2 
+  median1 = None
+  median2 = None
+
+  for k in range(total_length + 1):
+    element1 = arr1[i] if i < len(arr1) else None
+    element2 = arr2[j] if j < len(arr2) else None
+
+    if median1 is None and k == mid_index:
+      median1 = element1 if element1 is not None else element2
+    elif median2 is None and k == mid_index + 1:
+      median2 = element1 if element1 is not None else element2
+      break  # Exit loop after finding both medians
+
+    if element1 is None or (element2 is not None and element1 > element2):
+      j += 1
+    else:
+      i += 1
+
+  if total_length % 2 == 0:
+    median = (median1 + median2) / 2.0
+  else:
+    median = median1
+
+  return median
+
+
+5.Longest Palindromic Substring
+Code
+
+FUNCTION LongestPalindrome(string s)
+  length := len(s)
+  IF length < 2 THEN
+    RETURN s
+  start := 0
+  end := 0
+  FOR i := 0 TO length - 1 DO
+    len1 := ExpandAroundCenter(s, i, i)  
+    len2 := ExpandAroundCenter(s, i, i + 1)  
+    maxLength := MAX(len1, len2)
+    IF maxLength > (end - start) THEN
+      start := i - (maxLength - 1) DIV 2
+      end := i + maxLength DIV 2
+  RETURN substring(s, start, end + 1)
+
+FUNCTION ExpandAroundCenter(string s, int left, int right)
+  WHILE left >= 0 AND right < len(s) AND s[left] = s[right] DO
+    left := left - 1
+    right := right + 1
+  RETURN right - left - 1
+
+
+10. REGULAR EXPRESSION MATCHING
+
+function RegexMatch(text, pattern)
+  # Initialize a 2D boolean table (dp) to store subproblem results
+  # + 1 for empty string cases
+  rows = len(text) + 1
+  cols = len(pattern) + 1
+  dp = [[False] * cols for _ in range(rows)]
+
+  # Base cases: empty string matches empty pattern
+  dp[0][0] = True
+
+  # Iterate through the dp table
+  for i in range(1, rows):
+    for j in range(1, cols):
+      # If characters match or pattern char is ., consider match from prev cells
+      if text[i-1] == pattern[j-1] or pattern[j-1] == '.':
+        dp[i][j] = dp[i-1][j-1]
+      # Handle '*' in pattern
+      elif pattern[j-1] == '*':
+        # '*' matches 0 preceding elements (already captured in dp[i][j-1])
+        dp[i][j] = dp[i][j-1]
+        # Or '*' matches 1 or more preceding elements (check previous row)
+        if text[i-1] == pattern[j-2] or pattern[j-2] == '.':
+          dp[i][j] = dp[i][j] or dp[i-1][j]
+      # No match otherwise
+      else:
+        dp[i][j] = False
+
+  # Return the final result from the bottom right corner
+  return dp[rows-1][cols-1]
